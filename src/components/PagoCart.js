@@ -50,6 +50,7 @@ export const PagoCart = () => {
   }
   return (
     <div className='mt-5 pt-5 m-auto w-75'>
+      <h1 className='text-center fw-bold'>Pago</h1>
       <Form>
         <Form.Group className="mb-4" controlId="formBasicEmail">
           <Form.Label>Correo</Form.Label>

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Table, Nav, Modal, Button } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Table, Nav, Modal } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { menu } from '../data/menu'
 import { agregarPedido } from '../redux/reducers/pedidosReducer'
