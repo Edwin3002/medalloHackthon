@@ -1,0 +1,54 @@
+/* menu */
+.divFix {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 100%;
+  background-color: red;
+}
+.filterNav {
+  width: 100%;
+  margin: auto;
+  position: fixed;
+}
+.filterNav div a{
+    font-size: x-small;
+}
+.imgFood {
+  width: 4rem;
+  height: 3rem;
+  display: flex;
+  margin: auto;
+}
+.imgF {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* //pedidos */
+.navFilter {
+  position: fixed;
+}
+.imgFoodP {
+  height: 3rem;
+  display: flex;
+  margin: auto;
+}
+.tablePedidos {
+  width: 35% !important;
+  position: fixed;
+}
+.add {
+  color: rgb(63, 37, 235);
+}
+.add:hover {
+  color: rgb(58, 34, 215);
+  transform: scale(1.2);
+}
+.remove {
+  color: red;
+}
+.remove:hover {
+  color: brown;
+  transform: scale(1.2);
+}
