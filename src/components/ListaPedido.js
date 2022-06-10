@@ -4,17 +4,37 @@ import { useDispatch, useSelector } from 'react-redux'
 import '../style/menu.css'
 import { ArrowLeft, ArrowRight } from '../icons/icons'
 import { aumentarPedido, disminuirPedido, removerPedido, vaciarPedido } from '../redux/reducers/pedidosReducer'
-import { useEffect } from 'react'
-import { paintPedidosAsync } from '../redux/actions/actionsPedidos'
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 export const ListaPedido = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { pedidosItems, cantidad, total } = useSelector((store) => store.pedidos)
-    useEffect(() => {
-        dispatch(paintPedidosAsync())
-    }, [])
 
-
+    const pagar = () => {
+        navigate('/pago')
+    }
+    const cancelar = () => {
+        dispatch(vaciarPedido())
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Pedido Cancelado',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+    const remover = (id) => {
+        dispatch(removerPedido(id))
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Producto Removido',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
     if (cantidad < 1) {
         return (<div>
             <h2>Your back</h2>
@@ -22,12 +42,8 @@ export const ListaPedido = () => {
         </div>
         )
     }
-
-    
-    // https://static.vecteezy.com/system/resources/previews/003/247/836/large_2x/grill-menu-with-delicious-food-in-wooden-background-vector.jpg
     return (
         <div>
-
             <Table className=' ' striped bordered hover variant="secondary">
                 <thead>
                     <tr className='text-center'>
@@ -43,7 +59,7 @@ export const ListaPedido = () => {
                                     <td className='w-50'><div className='imgFoodP w-50'><img className='imgF' src={img} alt={nombre} /></div></td>
                                     <td className='w-25'>
                                         <div>${precio}</div>
-                                        <div className='remove' onClick={()=>dispatch(removerPedido(id))}>Remover</div>
+                                        <div className='remove' onClick={() => remover(id)}>Remover</div>
                                     </td>
                                     <td className='w-25'>
                                         <span onClick={() => {
@@ -64,7 +80,7 @@ export const ListaPedido = () => {
                     <tr>
                         <td className='bg-info d-flex justify-content-around'>
                             <span>
-                            Total:{total}
+                                Total:{total}
                             </span>
                             <span>
                                 Cantidad: {cantidad}
@@ -73,7 +89,10 @@ export const ListaPedido = () => {
                     </tr>
                 </tfoot>
             </Table>
-            <Button variant='danger' className='my-2' onClick={() => { dispatch(vaciarPedido()) }}>Cancelar pedido</Button>
+            <div className='d-flex justify-content-between'>
+                <Button variant='danger' className='my-2' onClick={() => { cancelar() }}>Cancelar pedido</Button>
+                <Button variant='success' className='my-2' onClick={() => { pagar() }}>Pagar pedido</Button>
+            </div>
         </div>
 
     )
