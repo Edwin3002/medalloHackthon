@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { pedidosFood } from "../../data/pedidos";
 const initialState = {
-    pedidosItems: pedidosFood.slice(0, 4),
-    cantidad: 4,
+    pedidosItems: [],
+    cantidad: 0,
     total: 0,
     isLoading: true
-}
+};
 
 const pedidosReducer = createSlice({
     name: 'pedi',
