@@ -23,23 +23,23 @@ export const Menu = () => {
               </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link onClick={() => { filterFood('bebidas') }}>
-              Bebidas
+            <Nav.Link onClick={() => { filterFood('Lácteos') }}>
+            Lácteos
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link onClick={() => { filterFood('carnes') }}>
-              Carne
+            <Nav.Link onClick={() => { filterFood('Carnes') }}>
+              Carnes
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link onClick={() => { filterFood('postres') }}>
-              Postres
+            <Nav.Link onClick={() => { filterFood('Frutas y Verduras') }}>
+            Frutas y Verduras
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link onClick={() => { filterFood('comidas_rapidas') }}>
-              Comidas Rapidas
+            <Nav.Link onClick={() => { filterFood('Panaderia') }}>
+            Panaderia
             </Nav.Link>
           </Nav.Item>
         </Nav>
