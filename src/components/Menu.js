@@ -3,6 +3,7 @@ import { Table, Nav } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { menu } from '../data/menu'
 import { agregarPedido } from '../redux/reducers/pedidosReducer'
+import Swal from "sweetalert2"
 import '../style/menu.css'
 
 export const Menu = () => {
@@ -11,6 +12,16 @@ export const Menu = () => {
 
   const filterFood = (filt) => {
     setMenuFood(menu.filter((menuFilter) => menuFilter.categoria === filt))
+  }
+  const add = (f) =>{
+    dispatch(agregarPedido(f))
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Producto agregado',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
   return (
     <div className='mt-5 pt-2' >
@@ -60,7 +71,7 @@ export const Menu = () => {
                 <td><div className='imgFood'><img className='imgF' src={food.img} alt={food.nombre} /></div></td>
                 <td className='w-50'>{food.nombre}</td>
                 <td className='w-25'>$ {food.precio}</td>
-                <td className='w-25'> <p className='add' onClick={()=> dispatch(agregarPedido(food))}>Agregar</p></td>
+                <td className='w-25'> <p className='add' onClick={()=> add(food)}>Agregar</p></td>
               </tr>
             ))}
         </tbody>
