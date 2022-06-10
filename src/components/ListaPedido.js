@@ -5,11 +5,28 @@ import '../style/menu.css'
 import { ArrowLeft, ArrowRight } from '../icons/icons'
 import { aumentarPedido, disminuirPedido, removerPedido, vaciarPedido } from '../redux/reducers/pedidosReducer'
 import { useEffect } from 'react'
-import { paintPedidosAsync } from '../redux/actions/actionsPedidos'
+import { addPedidosAsync, paintPedidosAsync } from '../redux/actions/actionsPedidos'
 
 export const ListaPedido = () => {
     const dispatch = useDispatch()
     const { pedidosItems, cantidad, total } = useSelector((store) => store.pedidos)
+
+    let men = [
+        {
+            "name": "leche"
+        }
+    ]
+    let men2 = ['paco', 'felipe'
+        
+    ]
+    const pagar = () => {
+        console.log(pedidosItems);
+        console.log([pedidosItems]);
+        console.log({ pedidosItems });
+        dispatch(addPedidosAsync(men))
+        // dispatch(addPedidosAsync({ pedidosItems }))
+    }
+
     useEffect(() => {
         dispatch(paintPedidosAsync())
     }, [])
@@ -23,7 +40,7 @@ export const ListaPedido = () => {
         )
     }
 
-    
+
     // https://static.vecteezy.com/system/resources/previews/003/247/836/large_2x/grill-menu-with-delicious-food-in-wooden-background-vector.jpg
     return (
         <div>
@@ -43,7 +60,7 @@ export const ListaPedido = () => {
                                     <td className='w-50'><div className='imgFoodP w-50'><img className='imgF' src={img} alt={nombre} /></div></td>
                                     <td className='w-25'>
                                         <div>${precio}</div>
-                                        <div className='remove' onClick={()=>dispatch(removerPedido(id))}>Remover</div>
+                                        <div className='remove' onClick={() => dispatch(removerPedido(id))}>Remover</div>
                                     </td>
                                     <td className='w-25'>
                                         <span onClick={() => {
@@ -64,7 +81,7 @@ export const ListaPedido = () => {
                     <tr>
                         <td className='bg-info d-flex justify-content-around'>
                             <span>
-                            Total:{total}
+                                Total:{total}
                             </span>
                             <span>
                                 Cantidad: {cantidad}
@@ -73,7 +90,11 @@ export const ListaPedido = () => {
                     </tr>
                 </tfoot>
             </Table>
-            <Button variant='danger' className='my-2' onClick={() => { dispatch(vaciarPedido()) }}>Cancelar pedido</Button>
+            <div>
+
+                <Button variant='danger' className='my-2' onClick={() => { dispatch(vaciarPedido()) }}>Cancelar pedido</Button>
+                <Button variant='success' className='my-2' onClick={() => { pagar() }}>Pagar pedido</Button>
+            </div>
         </div>
 
     )

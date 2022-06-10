@@ -12,10 +12,25 @@ export const paintPedidosAsync = () => {
             collection(getDataFire, 'pedidos')
         );
         const pedidos = [];
-        getDataPedidos.forEach((carr) => {
+        getDataPedidos.forEach((pedi) => {
             pedidos.push({
-                ...carr.data(),
+                ...pedi.data(),
             });
         });
+    };
+};
+
+//add pedidos
+
+export const addPedidosAsync = (pedi) => {
+    console.log(pedi)
+    return (dispatch) => {
+        addDoc(collection(getDataFire, 'pedidos'), pedi)
+            // .then((resp) => {
+            //     dispatch(addCareerSync(pedi));
+            // })
+            // .catch((err) => {
+            //     console.warn(err);
+            // });
     };
 };
