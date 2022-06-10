@@ -1,13 +1,28 @@
-import React, { useState } from 'react'
-import { Table, Nav } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Table, Nav,  Modal, Button  } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { menu } from '../data/menu'
 import { agregarPedido } from '../redux/reducers/pedidosReducer'
 import '../style/menu.css'
 
+
 export const Menu = () => {
   const [menuFood, setMenuFood] = useState(menu);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
+  const [show, setShow] = useState(false);
+  const [producto, setProducto] = useState({
+    id: "",
+    nombre: "",
+    descripcion: "",
+    img: "",
+    precio: "",
+    cantidad: "",
+    categoria: "",
+  });
+  const detalle = (foot) => {
+    setShow(true)
+    setProducto(foot);
+  }
 
   const filterFood = (filt) => {
     setMenuFood(menu.filter((menuFilter) => menuFilter.categoria === filt))
@@ -57,7 +72,9 @@ export const Menu = () => {
           {
             menuFood.map((food) => (
               <tr key={food.id} className='text-center'>
-                <td><div className='imgFood'><img className='imgF' src={food.img} alt={food.nombre} /></div></td>
+                <td><div className='imgFood'><img className='imgF' src={food.img} alt={food.nombre} 
+                onClick={() => detalle(food)} 
+                /></div></td>
                 <td className='w-50'>{food.nombre}</td>
                 <td className='w-25'>$ {food.precio}</td>
                 <td className='w-25'> <p className='add' onClick={()=> dispatch(agregarPedido(food))}>Agregar</p></td>
@@ -65,6 +82,34 @@ export const Menu = () => {
             ))}
         </tbody>
       </Table>
+
+      {/* <Button variant="primary" onClick={() => setShow(true)}>
+      Custom Width Modal
+    </Button> */}
+    <Modal
+      show={show}
+      onHide={() => setShow(false)}
+      dialogClassName="modal-90w"
+      aria-labelledby="example-custom-modal-styling-title"
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="example-custom-modal-styling-title">
+        {producto.nombre}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+      <div className="sub_container">
+        <div className="container_right">
+           <img className="img__modal" src={producto.img} />
+        </div>
+         <div className="container_left">
+           <p>{producto.descripcion}</p>
+           <small>{` $ ${producto.precio}`}</small>
+          <small>{producto.cantidad}</small>
+         </div>
+       </div>
+      </Modal.Body>
+    </Modal>
     </div>
   )
 }
