@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { vaciarPedido } from '../redux/reducers/pedidosReducer'
 
 export const PagoCart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState(
     {
       correo: '',
@@ -18,7 +20,6 @@ export const PagoCart = () => {
   const { correo, numeroCard, fecha, cvv, nombre } = inputValue
 
   const pagar = () => {
-    // dispatch(addPedidosAsync({ pedidosItems }))
     if (correo.length === 0 || numeroCard === 0 || fecha.length === 0 || cvv.length === 0 || nombre.length === 0) {
       Swal.fire({
         position: 'top-end',
@@ -33,10 +34,11 @@ export const PagoCart = () => {
         icon: 'success',
         title: 'Pago exitoso',
         showConfirmButton: false,
-        timer: 2500
+        timer: 2000
       })
       setTimeout(() => {
-        dispatch(vaciarPedido())
+        dispatch(vaciarPedido());
+        navigate('/');
       }, 2000);
     }
   }

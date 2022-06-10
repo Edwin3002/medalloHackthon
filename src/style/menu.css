@@ -45,6 +45,13 @@
   color: rgb(58, 34, 215);
   transform: scale(1.2);
 }
+.pay {
+  color: green;
+}
+.pay:hover {
+  color: green;
+  transform: scale(1.2);
+}
 .remove {
   color: red;
 }
