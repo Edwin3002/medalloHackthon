@@ -12,13 +12,10 @@ export const paintPedidosAsync = () => {
             collection(getDataFire, 'pedidos')
         );
         const pedidos = [];
-        console.log(getDataPedidos)
-        console.log(getDataPedidos.data)
         getDataPedidos.forEach((carr) => {
             pedidos.push({
                 ...carr.data(),
             });
         });
-        console.log(pedidos)
     };
 };
