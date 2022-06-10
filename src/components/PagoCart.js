@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { addPedidosAsync } from '../redux/actions/actionsPedidos'
 import { vaciarPedido } from '../redux/reducers/pedidosReducer'
 
 export const PagoCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pedidosItems } = useSelector((store) => store.pedidos)
+
   const [inputValue, setInputValue] = useState(
     {
       correo: '',
@@ -29,6 +32,7 @@ export const PagoCart = () => {
         timer: 2500
       })
     } else {
+      dispatch(addPedidosAsync({pedidosItems}))
       Swal.fire({
         position: 'top-end',
         icon: 'success',
