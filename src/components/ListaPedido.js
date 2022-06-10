@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import '../style/menu.css'
 import { ArrowLeft, ArrowRight } from '../icons/icons'
 import { aumentarPedido, disminuirPedido, removerPedido, vaciarPedido } from '../redux/reducers/pedidosReducer'
-import { addPedidosAsync } from '../redux/actions/actionsPedidos'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,11 +14,6 @@ export const ListaPedido = () => {
 
     const pagar = () => {
         navigate('/pago')
-        // dispatch(addPedidosAsync({ pedidosItems }))
-
-        // setTimeout(() => {
-        //     dispatch(vaciarPedido())
-        // }, 2000);
     }
     const cancelar = () => {
         dispatch(vaciarPedido())
